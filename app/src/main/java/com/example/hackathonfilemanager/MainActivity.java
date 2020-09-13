@@ -139,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         if(!isFileManagerInitialised) {
-            currentPath = "/storage/emulated/0";
+            currentPath = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+            currentPath = currentPath.substring(0,currentPath.lastIndexOf('/'));
             rootPath = currentPath;
             listView.setAdapter(adapter);
             refresh();
@@ -155,8 +156,7 @@ public class MainActivity extends AppCompatActivity {
             backButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    refresh();
-                    checkButtonPanelDisplay();
+
                     //change directory
                     if(currentPath.equals(rootPath)){
                         Toast.makeText(getApplicationContext(), "Can't go back. Viewing root directory already!",
